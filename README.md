@@ -35,7 +35,7 @@ VitaTrack Health System is a comprehensive healthcare appointment and record man
 
 ## Contributing
 
-We welcome contributions from the community. If you wish to contribute, please take a look at our contributing guidelines and code of conduct.
+This is a project created by Paul Wolfe, Nicholas Bava, and Andy DiCarlo
 
 ## License
 
