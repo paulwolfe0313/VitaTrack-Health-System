@@ -1,15 +1,20 @@
 package vitatrack;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import lombok.Data;
+import lombok.*;
 
-import javax.persistence.Entity;
 import java.math.BigDecimal;
+import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
-@Data
 public class AvailablePrescriptions {
 
     @Id
@@ -21,5 +26,5 @@ public class AvailablePrescriptions {
     private String description;
 
     @ManyToMany
-    private PatientChart patientChart;
+    private List<PatientChart> patientChart;
 }
