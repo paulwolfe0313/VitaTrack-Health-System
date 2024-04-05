@@ -1,18 +1,31 @@
 package vitatrack;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
-import javax.persistence.Entity;
+import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
-@Data
 public class Admin extends User{
 
-    @OneToMany(mappedBy = "admin")
-    private Bill bill;
+    @JsonIgnore
+    @OneToMany(mappedBy = "admin", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+    @JsonIdentityReference(alwaysAsId=true)
+    private List<Bill> bills;
 
 
 }

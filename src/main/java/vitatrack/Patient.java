@@ -1,17 +1,24 @@
 package vitatrack;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
-@Data
 public class Patient extends User{
 
 
@@ -25,11 +32,19 @@ public class Patient extends User{
     private String insuranceProvider;
     private String insuranceNumber;
 
-    @OneToMany(mappedBy = "patient")
-    private Appointment appointment;
+    @OneToMany(mappedBy = "patient", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+    @JsonIdentityReference(alwaysAsId=true)
+    private List<Appointment> appointment;
 
-    @OneToMany(mappedBy = "patient")
-    private PatientChart patientChart;
+    @OneToMany(mappedBy = "patient", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+    @JsonIdentityReference(alwaysAsId=true)
+    private List<PatientChart> patientChart;
 
 
 }
