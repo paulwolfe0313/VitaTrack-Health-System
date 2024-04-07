@@ -10,6 +10,7 @@ import vitatrack.data.PatientRepository;
 import vitatrack.data.ProviderRepository;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -148,6 +149,10 @@ public class UserService {
             response.put("Logged In Successfully!", adminRepository.findAdminByUserNameAndPassWord(userName, passWord));
             return response;
         }
+    }
+
+    public List<Provider> getProviders(){
+        return providerRepository.findAll().stream().toList();
     }
 
 }
