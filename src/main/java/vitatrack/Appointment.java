@@ -19,7 +19,7 @@ import java.util.Date;
 public class Appointment {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Date appointmentDate;
@@ -44,5 +44,9 @@ public class Appointment {
     private Patient patient;
 
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+    @JsonIdentityReference(alwaysAsId=true)
     private PatientChart patientChart;
 }
