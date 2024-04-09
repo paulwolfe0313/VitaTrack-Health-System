@@ -23,7 +23,7 @@ public class AvailableProcedures {
     private Long id;
 
     private String procedureName;
-    private BigDecimal procedureCost;
+    private BigDecimal procedureCost = BigDecimal.valueOf(0);
     private String description;
 
     @JsonIgnore
