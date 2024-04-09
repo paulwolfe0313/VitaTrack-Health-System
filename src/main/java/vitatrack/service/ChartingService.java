@@ -2,14 +2,13 @@ package vitatrack.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vitatrack.Appointment;
-import vitatrack.Patient;
-import vitatrack.PatientChart;
-import vitatrack.Provider;
-import vitatrack.data.AppointmentRepository;
-import vitatrack.data.PatientChartRepository;
-import vitatrack.data.PatientRepository;
-import vitatrack.data.ProviderRepository;
+import vitatrack.*;
+import vitatrack.data.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ChartingService {
@@ -18,13 +17,27 @@ public class ChartingService {
     ProviderRepository providerRepository;
     AppointmentRepository appointmentRepository;
     PatientChartRepository patientChartRepository;
+    AvailableProceduresRepository availableProceduresRepository;
+    AvailablePrescriptionsRepository availablePrescriptionsRepository;
 
     @Autowired
-    public ChartingService(PatientRepository patientRepository, ProviderRepository providerRepository, AppointmentRepository appointmentRepository, PatientChartRepository patientChartRepository) {
+    public ChartingService(PatientRepository patientRepository, ProviderRepository providerRepository, AppointmentRepository appointmentRepository,
+                           PatientChartRepository patientChartRepository, AvailableProceduresRepository availableProceduresRepository,
+                           AvailablePrescriptionsRepository availablePrescriptionsRepository) {
         this.patientRepository = patientRepository;
         this.providerRepository = providerRepository;
         this.appointmentRepository = appointmentRepository;
         this.patientChartRepository = patientChartRepository;
+        this.availableProceduresRepository = availableProceduresRepository;
+        this.availablePrescriptionsRepository = availablePrescriptionsRepository;
+    }
+
+    public PatientChart submitChart(Long patientId, Long providerId, Long appointmentId,
+                                    Integer height, Integer weight, Integer bloodPressureSystolic,
+                                    Integer bloodPressureDiastolic, Integer restingHeartRate,
+                                    List<AvailableProcedures> procedures, List<AvailablePrescriptions> prescriptions){
+        PatientChart chart = createNewChart(patientId, providerId, appointmentId);
+        return setVitals(chart.getId(), height, weight, bloodPressureSystolic, bloodPressureDiastolic, restingHeartRate, procedures, prescriptions);
     }
 
     public PatientChart createNewChart(Long patientId, Long providerId, Long appointmentId) {
@@ -50,7 +63,9 @@ public class ChartingService {
         return chart;
     }
 
-    public void setVitals(Long patientChartId, Integer height, Integer weight, Integer bloodPressureSystolic, Integer bloodPressureDiastolic, Integer restingHeartRate){
+    public PatientChart setVitals(Long patientChartId, Integer height, Integer weight, Integer bloodPressureSystolic,
+                                  Integer bloodPressureDiastolic, Integer restingHeartRate,
+                                  List<AvailableProcedures> procedures, List<AvailablePrescriptions> prescriptions){
         PatientChart chart = patientChartRepository.findPatientChartById(patientChartId);
 
         if (height != null){
@@ -68,5 +83,26 @@ public class ChartingService {
         if (restingHeartRate != null){
             chart.setRestingHeartRate(restingHeartRate);
         }
+        if (!procedures.isEmpty()){
+            chart.getProcedures().addAll(procedures);
+        }
+        if (!prescriptions.isEmpty()){
+            chart.getPrescriptions().addAll(prescriptions);
+        }
+
+        patientChartRepository.save(chart);
+        return chart;
+    }
+
+    public List<PatientChart> getPatientRecords(Long patientId){
+        Patient patient = patientRepository.findPatientById(patientId);
+        return patientChartRepository.findAllByPatient(patient);
+    }
+
+    public HashMap<String, ArrayList<Object>> getProceduresAndPrescriptions(){
+        HashMap<String, ArrayList<Object>> map = new HashMap<>();
+        map.put("Procedures", new ArrayList<>(availableProceduresRepository.findAll()));
+        map.put("Prescriptions", new ArrayList<>(availablePrescriptionsRepository.findAll()));
+        return map;
     }
 }
