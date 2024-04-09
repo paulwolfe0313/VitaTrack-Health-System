@@ -1,16 +1,17 @@
 package vitatrack.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import vitatrack.Admin;
 import vitatrack.Patient;
 import vitatrack.Provider;
 import vitatrack.data.AdminRepository;
 import vitatrack.data.PatientRepository;
 import vitatrack.data.ProviderRepository;
-
-import java.util.HashMap;
-import java.util.List;
 
 @Service
 public class UserService {
@@ -50,7 +51,7 @@ public class UserService {
 
         patientRepository.save(patient);
 
-        response.put("Pateint Created!", patient);
+        response.put("Patient Created!", patient);
 
         return response;
     }

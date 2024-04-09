@@ -1,15 +1,20 @@
 package vitatrack;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import lombok.*;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -17,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Entity
-public class Admin extends User{
+public class Admin extends Users{
 
     @JsonIgnore
     @OneToMany(mappedBy = "admin", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
