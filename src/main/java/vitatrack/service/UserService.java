@@ -1,6 +1,7 @@
 package vitatrack.service;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,23 @@ public class UserService {
         this.patientRepository = patientRepository;
         this.providerRepository = providerRepository;
         this.adminRepository = adminRepository;
+    }
+
+    public HashMap<String, Patient> newPatient(Object pObject){
+        LinkedHashMap pat = (LinkedHashMap) pObject;
+        String firstName = (String) pat.get("firstName");
+        String lastName = (String) pat.get("lastName");
+        String userName = (String) pat.get("userName");
+        String passWord = (String) pat.get("passWord");
+        String paymentCardNumber = (String) pat.get("paymentCardNumber");
+        String ccCVV = (String) pat.get("ccCVV");
+        String ccExpiration = (String) pat.get("ccExpiration");
+        String insuranceProvider = (String) pat.get("insuranceProvider");
+        String insuranceNumber = (String) pat.get("insuranceNumber");
+
+        HashMap<String, Patient> ret = createPatient(firstName, lastName, userName, passWord, paymentCardNumber, ccCVV, ccExpiration, insuranceProvider, insuranceNumber);
+
+        return ret;
     }
 
     public HashMap<String, Patient> createPatient(String firstName, String lastName, String userName, String passWord, String paymentCardNumber, String ccCVV, String ccExpiration, String insuranceProvider, String insuranceNumber){
