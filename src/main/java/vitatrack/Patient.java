@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Entity
-public class Patient extends User{
+public class Patient extends Users{
 
 
     @CreditCardNumber(message="Not a valid credit card number")

@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Entity
-public class Admin extends User{
+public class Admin extends Users{
 
     @JsonIgnore
     @OneToMany(mappedBy = "admin", cascade = {CascadeType.MERGE, CascadeType.PERSIST})

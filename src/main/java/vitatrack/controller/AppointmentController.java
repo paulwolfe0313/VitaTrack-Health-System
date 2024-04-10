@@ -40,6 +40,18 @@ public class AppointmentController {
         return new ResponseEntity(returnedAppointment, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/reschedule-appointment", method = RequestMethod.POST)
+    public ResponseEntity<Appointment> rescheduleAppointment(@RequestParam(value = "appointmentId") Long appointmentId,
+                                                             @RequestParam(value = "providerId") Long providerId,
+                                                             @RequestParam(value = "patientId") Long patientId,
+                                                             @RequestParam(value = "appointmentDate") Date appointmentDate,
+                                                             @RequestParam(value = "startTime")LocalTime startTime,
+                                                             @RequestParam(value = "endTime") LocalTime endTime){
+        Appointment returnedAppointment = appointmentService.rescheduleAppointment(appointmentId, providerId, patientId, appointmentDate, startTime, endTime);
+
+        return new ResponseEntity(returnedAppointment, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/book-appointment/list-providers", method = RequestMethod.GET)
     public ResponseEntity<List<Provider>> getProviders(){
         return new ResponseEntity(userService.getProviders(), HttpStatus.OK);
