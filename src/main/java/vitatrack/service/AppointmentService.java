@@ -51,6 +51,14 @@ public class AppointmentService {
         return newAppointment;
     }
 
+    public Appointment rescheduleAppointment(Long appointmentId, Long providerId, Long patientId, Date date, LocalTime startTime, LocalTime endTime){
+        if (isSlotAvailable(providerId, date, startTime, endTime)){
+            cancelAppointment(appointmentId);
+            return createAppointment(providerId, patientId, date, startTime, endTime);
+        }
+        return null;
+    }
+
     public void cancelAppointment(Long appointmentId){
         appointmentRepository.deleteById(appointmentId);
     }
@@ -64,6 +72,8 @@ public class AppointmentService {
             if (startTime.isAfter(app.getStartTime()) && startTime.isBefore(app.getEndTime())) {
                 return false;
             } else if (endTime.isAfter(app.getStartTime()) && endTime.isBefore(app.getEndTime())) {
+                return false;
+            } else if (startTime.isBefore(app.getStartTime()) && endTime.isAfter(app.getStartTime())){
                 return false;
             }
         }

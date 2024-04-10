@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Entity
-public class Provider extends User{
+public class Provider extends Users{
 
     String medicalLicenseNumber;
 

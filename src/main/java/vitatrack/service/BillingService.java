@@ -12,6 +12,7 @@ import vitatrack.data.PatientChartRepository;
 import vitatrack.data.PatientRepository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class BillingService {
@@ -64,6 +65,12 @@ public class BillingService {
         billRepository.save(bill);
 
         return bill;
+    }
+
+    public List<Bill> getPatientBills(Long patientId){
+        Patient patient = patientRepository.findPatientById(patientId);
+
+        return billRepository.findAllByPatient(patient);
     }
 
 
