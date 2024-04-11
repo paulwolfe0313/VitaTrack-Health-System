@@ -171,4 +171,8 @@ public class UserService {
         return providerRepository.findAll().stream().toList();
     }
 
+    public List<Patient> getPatients(){
+        return patientRepository.findAll().stream().toList();
+    }
+
 }
