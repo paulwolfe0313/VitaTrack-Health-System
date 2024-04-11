@@ -1,0 +1,128 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.utility-bar {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.utility-links li {
+    display: inline;
+    margin-left: 20px;
+}
+
+.utility-links li a {
+    color: white;
+    text-decoration: none;
+}
+
+.logo {
+    font-weight: bold;
+}
+
+/* Form styling */
+form {
+    background-color: white;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .utility-bar {
+        flex-direction: column;
+    }
+    .utility-links {
+        text-align: center;
+    }
+    .utility-links li {
+        margin: 10px 0;
+    }
+}
+
+/* Specific styling for login page */
+.login-header {
+    text-align: center;
+    margin-top: 20px; /* Adjust the margin as needed */
+}
+
+#loginForm {
+    margin: 0 auto;
+    display: block;
+    width: 300px; /* Or as per your design requirements */
+}
+
+
+.registration-container {
+    text-align: center; /* Center align the content */
+    padding: 20px;
+}
+
+.register-title {
+    margin-bottom: 10px; /* Add spacing below the title */
+}
+
+.registration-image-container {
+    margin-bottom: 20px; /* Add spacing below the image container */
+}
+
+.registration-image {
+    max-width: 300px; /* Control the size of the image */
+    height: auto;
+    margin: 0 auto; /* Center the image */
+}
+
+#registerForm {
+    display: inline-block;
+    width: 300px; /* Adjust width as necessary */
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .registration-container {
+        padding: 20px;
+    }
+
+    #registerForm {
+        width: auto;
+    }
+}
