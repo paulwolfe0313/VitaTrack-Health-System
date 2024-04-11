@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import vitatrack.data.AvailablePrescriptionsRepository;
 import vitatrack.data.AvailableProceduresRepository;
+import vitatrack.data.PatientRepository;
+import vitatrack.data.ProviderRepository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -22,10 +24,33 @@ public class VitaTrackApplication {
 
     @Bean
     public CommandLineRunner dataLoader(AvailableProceduresRepository availableProceduresRepository,
-                                        AvailablePrescriptionsRepository availablePrescriptionsRepository) {
+                                        AvailablePrescriptionsRepository availablePrescriptionsRepository,
+                                        ProviderRepository providerRepository,
+                                        PatientRepository patientRepository) {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
+
+                Provider provider1 = new Provider();
+                provider1.setUserName("user");
+                provider1.setPassWord("password");
+                provider1.setFirstName("George");
+                provider1.setLastName("Doctor");
+                provider1.setMedicalLicenseNumber("12345678");
+                providerRepository.save(provider1);
+
+                Patient patient1 = new Patient();
+                patient1.setUserName("patient");
+                patient1.setPassWord("password");
+                patient1.setFirstName("Paul");
+                patient1.setLastName("Daniels");
+                patient1.setPaymentCardNumber("4111111111111111");
+                patient1.setCcCVV("123");
+                patient1.setCcExpiration("1126");
+                patient1.setInsuranceNumber("12345678");
+                patient1.setInsuranceProvider("MedCo");
+                patientRepository.save(patient1);
+
                 AvailableProcedures checkUp = new AvailableProcedures();
                 checkUp.setProcedureName("Check Up");
                 checkUp.setDescription("Regular Wellness Assessment");
