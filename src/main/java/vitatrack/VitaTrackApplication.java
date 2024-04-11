@@ -27,6 +27,7 @@ public class VitaTrackApplication {
                                         AvailablePrescriptionsRepository availablePrescriptionsRepository,
                                         PatientRepository patientRepository,
                                         ProviderRepository providerRepository) {
+      
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {

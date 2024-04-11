@@ -1,7 +1,6 @@
 package vitatrack.service;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +27,19 @@ public class UserService {
         this.adminRepository = adminRepository;
     }
 
-    public Patient newPatient(Patient patient){
+    public HashMap<String, Patient> newPatient(Patient patient){
+
+        HashMap<String, Patient> response = new HashMap<>();
+
+        // Check if patient already exists
+        if (!(patientRepository.findPatientByUserName(patient.getUserName()) == null)){
+            response.put("Patient already exists!", null);
+            return response;
+        }
+
         patientRepository.save(patient);
-
-        Patient ret = patientRepository.findPatientByFirstNameAndLastName(patient.getFirstName(), patient.getLastName());
-
-        return ret;
+        response.put("Patient Created!", patient);
+        return response;
     }
 
     public HashMap<String, Patient> createPatient(String firstName, String lastName, String userName, String passWord, String paymentCardNumber, String ccCVV, String ccExpiration, String insuranceProvider, String insuranceNumber){

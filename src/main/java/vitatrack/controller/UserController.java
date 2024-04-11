@@ -31,8 +31,8 @@ public class UserController {
         return "registration";
     }
     @RequestMapping(value = "/create-patient", method = RequestMethod.POST)
-    public ResponseEntity<Patient> createPatient(@ModelAttribute("patient") Patient patient){
-        return new ResponseEntity(userService.newPatient(patient), HttpStatus.OK);
+    public ResponseEntity<HashMap<String, Patient>> createPatient(Patient p){
+        return new ResponseEntity(userService.newPatient(p), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/create-provider", method = RequestMethod.POST)

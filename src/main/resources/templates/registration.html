@@ -12,12 +12,16 @@
         <div class="registration-image-container">
             <img th:src="@{/images/patients.jpg}" alt="Interactive health display" class="registration-image">
         </div>
-        <form action="#" method="POST" th:action="@{/create-patient}" id="registerForm" th:object="${patient}">
-            <label for="username">Username: </label>
-            <input type="text" th:field="*{userName}"/><br/>
+        <form action="#" method="POST" th:action="@{/create-patient}" id="registerForm">
 
-            <label for="password">Password: </label>
-            <input type="password" th:field="*{passWord}"/><br/>
+            <label for="userName">Username: </label>
+            <input type="text" name="userName"/><br/>
+
+            <label for="passWord">Password: </label>
+            <input type="passWord" name="passWord"/><br/>
+
+            <label for="confirm">Confirm password: </label>
+            <input type="passWord" name="confirm"/><br/>
 
             <label for="firstName">First name: </label>
             <input type="text" th:field="*{firstName}"/><br/>
