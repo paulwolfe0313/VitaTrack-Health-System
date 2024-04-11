@@ -26,16 +26,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/create-patient", method = RequestMethod.POST)
-    public ResponseEntity<HashMap<String, Patient>> createPatient(@RequestParam(value = "firstName") String firstName,
-                                                                  @RequestParam(value = "lastName") String lastName,
-                                                                  @RequestParam(value = "userName") String userName,
-                                                                  @RequestParam(value = "passWord") String passWord,
-                                                                  @RequestParam(value = "paymentCardNumber") String paymentCardNumber,
-                                                                  @RequestParam(value = "ccCVV") String ccCVV,
-                                                                  @RequestParam(value = "ccExpiration") String ccExpiration,
-                                                                  @RequestParam(value = "insuranceProvider") String insuranceProvider,
-                                                                  @RequestParam(value = "insuranceNumber") String insuranceNumber){
-        return new ResponseEntity(userService.createPatient(firstName, lastName, userName, passWord, paymentCardNumber, ccCVV, ccExpiration, insuranceProvider, insuranceNumber), HttpStatus.OK);
+    public ResponseEntity<HashMap<String, Patient>> createPatient(Patient p){
+        return new ResponseEntity(userService.newPatient(p), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/create-provider", method = RequestMethod.POST)
