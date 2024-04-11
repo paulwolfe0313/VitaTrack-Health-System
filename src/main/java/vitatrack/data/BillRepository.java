@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import vitatrack.Bill;
 import vitatrack.Patient;
+import vitatrack.PatientChart;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface BillRepository extends JpaRepository<Bill, Long> {
 
     Bill findBillById(Long id);
 
-    List<Bill> findAllByPatient(Patient patient);
+    List<Bill> findAllByPatientChart(PatientChart patientChart);
 }

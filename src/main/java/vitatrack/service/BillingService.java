@@ -67,10 +67,10 @@ public class BillingService {
         return bill;
     }
 
-    public List<Bill> getPatientBills(Long patientId){
-        Patient patient = patientRepository.findPatientById(patientId);
+    public List<Bill> getBill(Long patientChartId){
+        PatientChart patientChart = patientChartRepository.findPatientChartById(patientChartId);
 
-        return billRepository.findAllByPatient(patient);
+        return billRepository.findAllByPatientChart(patientChart);
     }
 
 

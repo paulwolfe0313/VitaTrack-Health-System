@@ -23,8 +23,8 @@ public class BillingController {
     }
 
     @RequestMapping(value = "/view-bills", method = RequestMethod.GET)
-    public ResponseEntity<List<Bill>> getPatientBills(@RequestParam(value = "patientId") Long patientId){
-        return new ResponseEntity(billingService.getPatientBills(patientId), HttpStatus.OK);
+    public ResponseEntity<List<Bill>> getPatientBills(@RequestParam(value = "patientChartId") Long patientChartId){
+        return new ResponseEntity(billingService.getBill(patientChartId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/create-bill", method = RequestMethod.POST)
