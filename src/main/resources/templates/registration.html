@@ -1,15 +1,19 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Vitatrack Health System</title>
+    <link rel="stylesheet" href="css/auth.css">
 </head>
 
-    <body>
-        <h1>Register</h1>
-        <img th:src="@{/images/patients.jpg}" alt="Family in doctor's office">
-        
-        <form method="POST" th:action="@{/create-patient}" id="registerForm">
-        
+<body>
+    <div class="registration-container">
+        <h1 class="register-title">Register</h1>
+        <div class="registration-image-container">
+            <img th:src="@{/images/patients.jpg}" alt="Interactive health display" class="registration-image">
+        </div>
+        <form action="#" method="POST" th:action="@{/create-patient}" id="registerForm">
+
             <label for="userName">Username: </label>
             <input type="text" name="userName"/><br/>
 
@@ -20,28 +24,28 @@
             <input type="passWord" name="confirm"/><br/>
 
             <label for="firstName">First name: </label>
-            <input type="text" name="firstName"/><br/>
+            <input type="text" th:field="*{firstName}"/><br/>
 
             <label for="lastName">Last name: </label>
-            <input type="text" name="lastName"/><br/>
-        
+            <input type="text" th:field="*{lastName}"/><br/>
+
             <label for="paymentCardNumber">Payment Card Number: </label>
-            <input type="text" name="paymentCardNumber"/><br/>
-        
+            <input type="text" th:field="*{paymentCardNumber}"/><br/>
+
             <label for="ccCVV">CVV: </label>
-            <input type="text" name="ccCVV"/><br/>
-        
+            <input type="text" th:field="*{ccCVV}"/><br/>
+
             <label for="ccExpiration">Expiration: </label>
-            <input type="text" name="ccExpiration"/><br/>
-        
+            <input type="text" th:field="*{ccExpiration}"/><br/>
+
             <label for="insuranceProvider">Insurance Provider: </label>
-            <input type="text" name="insuranceProvider"/><br/>
-        
+            <input type="text" th:field="*{insuranceProvider}"/><br/>
+
             <label for="insuranceNumber">Insurance Number: </label>
-            <input type="text" name="insuranceNumber"/><br/>
-        
+            <input type="text" th:field="*{insuranceNumber}"/><br/>
+
             <input type="submit" value="Register"/>
         </form>
-        
-    </body>
+    </div>
+</body>
 </html>

@@ -5,17 +5,16 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import vitatrack.Admin;
 import vitatrack.Patient;
 import vitatrack.Provider;
 import vitatrack.service.UserService;
 
-@RestController
+@Controller
 public class UserController {
 
     UserService userService;
@@ -25,6 +24,12 @@ public class UserController {
         this.userService = userService;
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String addPatient(Model model){
+        Patient patient = new Patient();
+        model.addAttribute("patient", patient);
+        return "registration";
+    }
     @RequestMapping(value = "/create-patient", method = RequestMethod.POST)
     public ResponseEntity<HashMap<String, Patient>> createPatient(Patient p){
         return new ResponseEntity(userService.newPatient(p), HttpStatus.OK);

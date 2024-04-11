@@ -25,19 +25,28 @@ public class VitaTrackApplication {
     @Bean
     public CommandLineRunner dataLoader(AvailableProceduresRepository availableProceduresRepository,
                                         AvailablePrescriptionsRepository availablePrescriptionsRepository,
-                                        ProviderRepository providerRepository,
-                                        PatientRepository patientRepository) {
+                                        PatientRepository patientRepository,
+                                        ProviderRepository providerRepository) {
+      
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
 
                 Provider provider1 = new Provider();
-                provider1.setUserName("user");
+                provider1.setUserName("prov");
                 provider1.setPassWord("password");
                 provider1.setFirstName("George");
-                provider1.setLastName("Doctor");
+                provider1.setLastName("Jacobs");
                 provider1.setMedicalLicenseNumber("12345678");
                 providerRepository.save(provider1);
+
+                Provider provider2 = new Provider();
+                provider2.setUserName("prov2");
+                provider2.setPassWord("password");
+                provider2.setFirstName("Phil");
+                provider2.setLastName("Donaldson");
+                provider2.setMedicalLicenseNumber("87654321");
+                providerRepository.save(provider2);
 
                 Patient patient1 = new Patient();
                 patient1.setUserName("patient");
@@ -50,6 +59,18 @@ public class VitaTrackApplication {
                 patient1.setInsuranceNumber("12345678");
                 patient1.setInsuranceProvider("MedCo");
                 patientRepository.save(patient1);
+
+                Patient patient2 = new Patient();
+                patient2.setUserName("patient2");
+                patient2.setPassWord("password");
+                patient2.setFirstName("Kelly");
+                patient2.setLastName("Fisher");
+                patient2.setPaymentCardNumber("4111111111111111");
+                patient2.setCcCVV("123");
+                patient2.setCcExpiration("1127");
+                patient2.setInsuranceNumber("87654321");
+                patient2.setInsuranceProvider("MedCo");
+                patientRepository.save(patient2);
 
                 AvailableProcedures checkUp = new AvailableProcedures();
                 checkUp.setProcedureName("Check Up");

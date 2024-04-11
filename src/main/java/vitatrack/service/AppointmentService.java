@@ -27,6 +27,23 @@ public class AppointmentService {
         this.appointmentRepository = appointmentRepository;
     }
 
+    public Appointment newAppointment(Appointment appointment, Long providerId, Long patientId){
+        Provider bookedProv = providerRepository.findProviderById(providerId);
+        Patient bookedPat = patientRepository.findPatientById(patientId);
+
+        bookedProv.getAppointment().add(appointment);
+        bookedPat.getAppointment().add(appointment);
+
+        appointment.setProvider(bookedProv);
+        appointment.setPatient(bookedPat);
+
+        patientRepository.save(bookedPat);
+        providerRepository.save(bookedProv);
+        appointmentRepository.save(appointment);
+
+        return appointment;
+    }
+
     public Appointment createAppointment(Long providerId, Long patientId, Date appointmentDate, LocalTime startTime, LocalTime endTime){
 
         Patient patientToBook = patientRepository.findPatientById(patientId);
