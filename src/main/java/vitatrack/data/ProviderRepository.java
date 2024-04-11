@@ -13,5 +13,7 @@ public interface ProviderRepository extends JpaRepository<Provider, Long> {
     Provider findProviderByUserName(String userName);
     Provider findProviderByUserNameAndPassWord(String userName, String passWord);
 
+    Provider findProviderByFirstNameAndLastName(String firstName, String lastName);
+
 
 }

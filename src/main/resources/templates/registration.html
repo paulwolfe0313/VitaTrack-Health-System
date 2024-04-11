@@ -12,36 +12,33 @@
         <div class="registration-image-container">
             <img th:src="@{/images/patients.jpg}" alt="Interactive health display" class="registration-image">
         </div>
-        <form method="POST" th:action="@{/create-patient}" id="registerForm">
+        <form action="#" method="POST" th:action="@{/create-patient}" id="registerForm" th:object="${patient}">
             <label for="username">Username: </label>
-            <input type="text" name="username"/><br/>
+            <input type="text" th:field="*{userName}"/><br/>
 
             <label for="password">Password: </label>
-            <input type="password" name="password"/><br/>
-
-            <label for="confirm">Confirm password: </label>
-            <input type="password" name="confirm"/><br/>
+            <input type="password" th:field="*{passWord}"/><br/>
 
             <label for="firstName">First name: </label>
-            <input type="text" name="firstName"/><br/>
+            <input type="text" th:field="*{firstName}"/><br/>
 
             <label for="lastName">Last name: </label>
-            <input type="text" name="lastName"/><br/>
+            <input type="text" th:field="*{lastName}"/><br/>
 
             <label for="paymentCardNumber">Payment Card Number: </label>
-            <input type="text" name="paymentCardNumber"/><br/>
+            <input type="text" th:field="*{paymentCardNumber}"/><br/>
 
             <label for="ccCVV">CVV: </label>
-            <input type="text" name="ccCVV"/><br/>
+            <input type="text" th:field="*{ccCVV}"/><br/>
 
             <label for="ccExpiration">Expiration: </label>
-            <input type="text" name="ccExpiration"/><br/>
+            <input type="text" th:field="*{ccExpiration}"/><br/>
 
             <label for="insuranceProvider">Insurance Provider: </label>
-            <input type="text" name="insuranceProvider"/><br/>
+            <input type="text" th:field="*{insuranceProvider}"/><br/>
 
             <label for="insuranceNumber">Insurance Number: </label>
-            <input type="text" name="insuranceNumber"/><br/>
+            <input type="text" th:field="*{insuranceNumber}"/><br/>
 
             <input type="submit" value="Register"/>
         </form>

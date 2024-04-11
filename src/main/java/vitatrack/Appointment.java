@@ -6,9 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalTime;
 import java.util.Date;
+
+import static jakarta.persistence.TemporalType.DATE;
 
 @Getter
 @Setter
@@ -22,6 +25,8 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Temporal(DATE)
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date appointmentDate;
 
     private LocalTime startTime;
