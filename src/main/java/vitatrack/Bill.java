@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,6 +19,9 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    BigDecimal totalCost;
+    Boolean paid = false;
+    String paymentCard;
 
     @OneToOne(mappedBy = "bill")
     private PatientChart patientChart;
