@@ -11,14 +11,14 @@
     <div class="utility-bar">
         <div class="logo">VitaTrack</div>
         <ul class="utility-links">
-            <li><a href="http://localhost:8080">Home</a></li>
-            <li><a href="login.html">My Account</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="./account">My Account</a></li>
             <li><a href="#settings">Settings</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#help">Help</a></li>
+            <li><a href="./about">About</a></li>
+            <li><a href="./help">Help</a></li>
         </ul>
     </div>
-</header>
+  </header>
 <div class="patient-container">
   <h1 class="patient-title">Patient Select</h1>
   <form action="#" method="POST" th:action="@{/patient-choice}" id="patientForm" th:object="${patients}">

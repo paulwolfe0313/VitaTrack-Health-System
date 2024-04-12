@@ -31,7 +31,7 @@ public class SecurityConfig {
 		http
 			.authorizeHttpRequests((requests) -> requests
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/console/**")).permitAll()
-				.requestMatchers("/", "/home", "/register", "/css/**", "/images/**", "/scripts/**", "/create-patient**").permitAll()
+				.requestMatchers("/", "/home", "/register", "/css/**", "/images/**", "/scripts/**", "/create-patient**", "/help**", "/about**").permitAll()
 				.anyRequest().authenticated())
 
                 .headers(headers -> headers.frameOptions().disable())
