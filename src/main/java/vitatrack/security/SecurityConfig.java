@@ -9,31 +9,39 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-        String[] staticResources  =  {
-                "/css/**",
-                "/images/**",
-                "/fonts/**",
-                "/scripts/**",
-        };
+	String[] staticResources  =  {
+			"/css/**",
+			"/images/**",
+			"/fonts/**",
+			"/scripts/**",
+	};
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
+		requestCache.setMatchingRequestParameterName(null);
+		
 		http
 			.authorizeHttpRequests((requests) -> requests
-                                .requestMatchers(AntPathRequestMatcher.antMatcher("/console/**")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/console/**")).permitAll()
 				.requestMatchers("/", "/home", "/register", "/css/**", "/images/**", "/scripts/**", "/create-patient**").permitAll()
-				.anyRequest().authenticated()
-			)
-                        .headers(headers -> headers.frameOptions().disable())
-                        .csrf(csrf -> csrf
-                                .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/console/**"))
-                                .disable())
+				.anyRequest().authenticated())
+
+                .headers(headers -> headers.frameOptions().disable())
+
+				.requestCache((cache) -> cache
+    				.requestCache(requestCache))
+
+                .csrf(csrf -> csrf
+                    .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/console/**"))
+                    .disable())
 
 			.formLogin((form) -> form
 				.loginPage("/login")

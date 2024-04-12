@@ -51,7 +51,7 @@ public class VitaTrackApplication {
                 patient1.setLastName("Daniels");
                 patient1.setPaymentCardNumber("4111111111111111");
                 patient1.setCcCVV("123");
-                patient1.setCcExpiration("1126");
+                patient1.setCcExpiration("11/26");
                 patient1.setInsuranceNumber("12345678");
                 patient1.setInsuranceProvider("MedCo");
                 patientRepository.save(patient1);
@@ -63,7 +63,7 @@ public class VitaTrackApplication {
                 patient2.setLastName("Fisher");
                 patient2.setPaymentCardNumber("4111111111111111");
                 patient2.setCcCVV("123");
-                patient2.setCcExpiration("1127");
+                patient2.setCcExpiration("11/27");
                 patient2.setInsuranceNumber("87654321");
                 patient2.setInsuranceProvider("MedCo");
                 patientRepository.save(patient2);
