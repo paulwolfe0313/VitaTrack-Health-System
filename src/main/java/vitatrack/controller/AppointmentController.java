@@ -33,7 +33,7 @@ public class AppointmentController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/appointment", method = RequestMethod.GET)
+    @RequestMapping(value = "/schedule-appointment", method = RequestMethod.GET)
     public String newAppointment(Model model){
         Appointment appointment = new Appointment();
         List<Provider> providers = userService.getProviders();
