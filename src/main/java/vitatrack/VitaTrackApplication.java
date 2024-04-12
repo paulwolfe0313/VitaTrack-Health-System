@@ -1,19 +1,16 @@
 package vitatrack;
 
+import java.math.BigDecimal;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
+
 import vitatrack.data.AvailablePrescriptionsRepository;
 import vitatrack.data.AvailableProceduresRepository;
 import vitatrack.data.PatientRepository;
 import vitatrack.data.ProviderRepository;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 @SpringBootApplication
 public class VitaTrackApplication {
@@ -27,7 +24,6 @@ public class VitaTrackApplication {
                                         AvailablePrescriptionsRepository availablePrescriptionsRepository,
                                         PatientRepository patientRepository,
                                         ProviderRepository providerRepository) {
-      
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
@@ -55,7 +51,7 @@ public class VitaTrackApplication {
                 patient1.setLastName("Daniels");
                 patient1.setPaymentCardNumber("4111111111111111");
                 patient1.setCcCVV("123");
-                patient1.setCcExpiration("1126");
+                patient1.setCcExpiration("11/26");
                 patient1.setInsuranceNumber("12345678");
                 patient1.setInsuranceProvider("MedCo");
                 patientRepository.save(patient1);
@@ -67,7 +63,7 @@ public class VitaTrackApplication {
                 patient2.setLastName("Fisher");
                 patient2.setPaymentCardNumber("4111111111111111");
                 patient2.setCcCVV("123");
-                patient2.setCcExpiration("1127");
+                patient2.setCcExpiration("11/27");
                 patient2.setInsuranceNumber("87654321");
                 patient2.setInsuranceProvider("MedCo");
                 patientRepository.save(patient2);
