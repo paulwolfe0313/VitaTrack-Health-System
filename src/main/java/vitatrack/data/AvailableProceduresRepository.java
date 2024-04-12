@@ -6,4 +6,6 @@ import vitatrack.AvailableProcedures;
 
 @Repository
 public interface AvailableProceduresRepository extends JpaRepository<AvailableProcedures, Long> {
+
+    AvailableProcedures findAvailableProceduresById(Long id);
 }

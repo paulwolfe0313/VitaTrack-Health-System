@@ -32,12 +32,16 @@ public class ChartingService {
         this.availablePrescriptionsRepository = availablePrescriptionsRepository;
     }
 
-    public PatientChart submitChart(Long patientId, Long providerId, Long appointmentId,
-                                    Integer height, Integer weight, Integer bloodPressureSystolic,
-                                    Integer bloodPressureDiastolic, Integer restingHeartRate,
-                                    List<AvailableProcedures> procedures, List<AvailablePrescriptions> prescriptions){
-        PatientChart chart = createNewChart(patientId, providerId, appointmentId);
-        return setVitals(chart.getId(), height, weight, bloodPressureSystolic, bloodPressureDiastolic, restingHeartRate, procedures, prescriptions);
+    public PatientChart submitChart(Appointment appointment, PatientChart chart, AvailableProcedures procedure, AvailablePrescriptions prescription){
+        appointment.setPatientChart(chart);
+        chart.setAppointment(appointment);
+        chart.getProcedures().add(procedure);
+        chart.getPrescriptions().add(prescription);
+
+        appointmentRepository.save(appointment);
+        patientChartRepository.save(chart);
+
+        return chart;
     }
 
     public PatientChart createNewChart(Long patientId, Long providerId, Long appointmentId) {
@@ -112,5 +116,13 @@ public class ChartingService {
 
     public List<AvailablePrescriptions> getPrescriptions(){
         return availablePrescriptionsRepository.findAll().stream().toList();
+    }
+
+    public AvailableProcedures getProcedureById(Long procedureId){
+        return availableProceduresRepository.findAvailableProceduresById(procedureId);
+    }
+
+    public AvailablePrescriptions getPrescriptionById(Long prescriptionId){
+        return availablePrescriptionsRepository.findAvailablePrescriptionsById(prescriptionId);
     }
 }

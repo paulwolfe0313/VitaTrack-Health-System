@@ -6,10 +6,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vitatrack.*;
 import vitatrack.service.AppointmentService;
 import vitatrack.service.ChartingService;
@@ -35,8 +32,8 @@ public class ChartingController {
         this.appointmentService = appointmentService;
     }
 
-    @RequestMapping(value = "/chart", method = RequestMethod.POST)
-    public ResponseEntity<PatientChart> createChart(@RequestParam(value = "patientId") Long patientId,
+    @RequestMapping(value = "/charting", method = RequestMethod.POST)
+    public String createChart(@RequestParam(value = "patientId") Long patientId,
                                                     @RequestParam(value = "providerId") Long providerId,
                                                     @RequestParam(value = "appointmentId") Long appointmentId,
                                                     @RequestParam(value = "height") Integer height,
@@ -46,14 +43,12 @@ public class ChartingController {
                                                     @RequestParam(value = "restingHeartRate") Integer restingHeartRate,
                                                     @RequestParam(value = "procedures") List<AvailableProcedures> procedures,
                                                     @RequestParam(value = "prescriptions") List<AvailablePrescriptions> prescriptions){
-        PatientChart chart = chartingService.submitChart(patientId, providerId, appointmentId, height, weight,
-                                                        systolicBloodPressure, diastolicBloodPressure, restingHeartRate,
-                                                        procedures, prescriptions);
-        return new ResponseEntity(chart, HttpStatus.OK);
+
+        return "index";
     }
 
     // Returns Hash Map with string key "Procedures" or "Prescriptions"
-    @RequestMapping(value = "/chart", method = RequestMethod.GET)
+    @RequestMapping(value = "/chart", method = RequestMethod.POST)
     public String getChartInfo(@RequestParam(value = "appointmentId") Long appointmentId, Model model){
 
         Appointment appointment = appointmentService.getAppointment(appointmentId);
@@ -68,9 +63,18 @@ public class ChartingController {
         model.addAttribute("prescriptions", prescriptions);
         model.addAttribute("chart", chart);
 
+        return "chart-form";
+    }
 
+    @RequestMapping(value = "chart-submit", method = RequestMethod.POST)
+    public String submitChart(@RequestParam(value = "procedureId") Long procedureId, @RequestParam(value = "prescriptionId") Long prescriptionId,
+                              @ModelAttribute(value = "chart") PatientChart chart, @ModelAttribute(value = "appointment") Appointment appointment){
+        AvailableProcedures procedure = chartingService.getProcedureById(procedureId);
+        AvailablePrescriptions prescription = chartingService.getPrescriptionById(prescriptionId);
 
-        return "";
+        chartingService.submitChart(appointment, chart, procedure, prescription);
+
+        return "index";
     }
 
     @RequestMapping(value = "patient-records", method = RequestMethod.POST)
