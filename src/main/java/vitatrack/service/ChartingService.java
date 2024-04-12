@@ -105,4 +105,12 @@ public class ChartingService {
         map.put("Prescriptions", new ArrayList<>(availablePrescriptionsRepository.findAll()));
         return map;
     }
+
+    public List<AvailableProcedures> getProcedures(){
+        return availableProceduresRepository.findAll().stream().toList();
+    }
+
+    public List<AvailablePrescriptions> getPrescriptions(){
+        return availablePrescriptionsRepository.findAll().stream().toList();
+    }
 }

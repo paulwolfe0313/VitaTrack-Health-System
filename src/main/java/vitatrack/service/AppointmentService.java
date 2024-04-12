@@ -28,6 +28,10 @@ public class AppointmentService {
     }
 
     public Appointment newAppointment(Appointment appointment, Long providerId, Long patientId){
+
+        if (!isSlotAvailable(providerId, appointment.getAppointmentDate(), appointment.getStartTime(), appointment.getEndTime())){
+            return null;
+        }
         Provider bookedProv = providerRepository.findProviderById(providerId);
         Patient bookedPat = patientRepository.findPatientById(patientId);
 
@@ -108,6 +112,10 @@ public class AppointmentService {
         Patient patient = patientRepository.findPatientById(patientId);
 
         return appointmentRepository.findAllByPatient(patient);
+    }
+
+    public Appointment getAppointment(Long appointmentId){
+        return appointmentRepository.findAppointmentById(appointmentId);
     }
 
 }

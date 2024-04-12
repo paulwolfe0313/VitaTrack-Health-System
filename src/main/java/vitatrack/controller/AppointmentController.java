@@ -47,6 +47,10 @@ public class AppointmentController {
                                   @RequestParam("providerId") Long providerId, @RequestParam("patientId") Long patientId){
         Appointment returnedAppointment = appointmentService.newAppointment(appointment, providerId, patientId);
 
+        if (returnedAppointment == null){
+            return "bookappointment";
+        }
+
         return "index";
     }
 
