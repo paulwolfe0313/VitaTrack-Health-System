@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vitatrack.*;
 import vitatrack.service.AppointmentService;
+import vitatrack.service.BillingService;
 import vitatrack.service.ChartingService;
 import vitatrack.service.UserService;
 
@@ -20,16 +21,17 @@ import java.util.List;
 public class ChartingController {
 
     ChartingService chartingService;
-
     UserService userService;
-
     AppointmentService appointmentService;
+    BillingService billingService;
 
     @Autowired
-    public ChartingController(ChartingService chartingService, UserService userService, AppointmentService appointmentService) {
+    public ChartingController(ChartingService chartingService, UserService userService, AppointmentService appointmentService,
+                              BillingService billingService) {
         this.chartingService = chartingService;
         this.userService = userService;
         this.appointmentService = appointmentService;
+        this.billingService = billingService;
     }
 
     @RequestMapping(value = "/charting", method = RequestMethod.POST)
@@ -73,6 +75,8 @@ public class ChartingController {
         AvailablePrescriptions prescription = chartingService.getPrescriptionById(prescriptionId);
 
         chartingService.submitChart(appointment, chart, procedure, prescription);
+
+        billingService.generateBill(chart);
 
         return "index";
     }

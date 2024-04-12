@@ -38,6 +38,17 @@ public class ChartingService {
         chart.getProcedures().add(procedure);
         chart.getPrescriptions().add(prescription);
 
+        Patient pat = appointment.getPatient();
+        Provider prov = appointment.getProvider();
+
+        chart.setPatient(pat);
+        chart.setProvider(prov);
+
+        pat.getPatientChart().add(chart);
+        prov.getPatientChart().add(chart);
+
+        patientRepository.save(pat);
+        providerRepository.save(prov);
         appointmentRepository.save(appointment);
         patientChartRepository.save(chart);
 
