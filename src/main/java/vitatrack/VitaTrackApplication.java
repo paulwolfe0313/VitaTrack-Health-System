@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import vitatrack.data.AdminRepository;
 import vitatrack.data.AvailablePrescriptionsRepository;
 import vitatrack.data.AvailableProceduresRepository;
 import vitatrack.data.PatientRepository;
@@ -22,11 +23,19 @@ public class VitaTrackApplication {
     @Bean
     public CommandLineRunner dataLoader(AvailableProceduresRepository availableProceduresRepository,
                                         AvailablePrescriptionsRepository availablePrescriptionsRepository,
+                                        AdminRepository adminRepository,
                                         PatientRepository patientRepository,
                                         ProviderRepository providerRepository) {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
+
+                Admin admin = new Admin();
+                admin.setFirstName("Site");
+                admin.setLastName("Administrator");
+                admin.setUserName("Admin");
+                admin.setPassWord("password");
+                adminRepository.save(admin);
 
                 Provider provider1 = new Provider();
                 provider1.setUserName("prov");
