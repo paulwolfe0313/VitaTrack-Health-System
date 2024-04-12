@@ -11,15 +11,15 @@
         <h1>Welcome to VitaTrack Health System</h1>
         <p>Your comprehensive healthcare management platform.</p>
     </div>
-    
     <header>
         <div class="utility-bar">
             <div class="logo">VitaTrack</div>
             <ul class="utility-links">
+                <li><a href="/">Home</a></li>
                 <li><a href="./account">My Account</a></li>
                 <li><a href="#settings">Settings</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#help">Help</a></li>
+                <li><a href="./about">About</a></li>
+                <li><a href="./help">Help</a></li>
             </ul>
         </div>
     </header>
@@ -29,7 +29,9 @@
                 <h2>For Patients</h2>
                 <img th:src="@{/images/patients.jpg}" alt="Family in doctor's office" class="section-image">
                 <p>Easily manage your health appointments and records.</p>
-                <button id="scheduleAppointment">Schedule Appointment</button>
+                <a href="./schedule-appointment">
+                    <button id="scheduleAppointment">Schedule Appointment</button>
+                </a>
             </div>
             <div class="card">
                 <h2>For Healthcare Providers</h2>
@@ -41,7 +43,9 @@
                 <h2>For Administrative Staff</h2>
                 <img th:src="@{/images/staff.jpg}" alt="Administrative staff at work" class="section-image">
                 <p>Streamline billing and insurance management.</p>
-                <button id="manageBilling">Manage Billing</button>
+                <a href="./view-bills">
+                    <button id="manageBilling">Manage Billing</button>
+                </a>
             </div>
         </div>
         

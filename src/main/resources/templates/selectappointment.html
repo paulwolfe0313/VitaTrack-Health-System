@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Vitatrack Health System</title>
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+  <header>
+    <div class="utility-bar">
+        <div class="logo">VitaTrack</div>
+        <ul class="utility-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="./account">My Account</a></li>
+            <li><a href="#settings">Settings</a></li>
+            <li><a href="./about">About</a></li>
+            <li><a href="./help">Help</a></li>
+        </ul>
+    </div>
+</header>
+<div class="appointment-container">
+  <h1 class="patient-title">Appointment Select</h1>
+  <form action="#" method="POST" th:action="@{/chart}" id="appointmentForm" th:object="${appointments}">
+
+    <div class="patient-group" id="patients">
+      <h3>Select your Patient:</h3>
+      <div th:each="appointment : ${appointments}">
+        <input id = "appointmentId" name = "appointmentId" type="checkbox"
+               th:value="${appointment.getId()}"/>
+        <span th:text="${appointment.getAppointmentDate() + ' ' + appointment.getStartTime()}">PATIENT</span><br/>
+      </div>
+    </div>
+
+    <input type="submit" value="Submit"/>
+  </form>
+</div>
+</body>
+</html>

@@ -2,10 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <head>
-        <title>Hello World!</title>
+        <title>Account</title>
+        <link rel="stylesheet" href="css/auth.css">
     </head>
     <body>
-        <h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
+        <header>
+            <div class="utility-bar">
+                <div class="logo">VitaTrack</div>
+                <ul class="utility-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="./account">My Account</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                    <li><a href="./about">About</a></li>
+                    <li><a href="./help">Help</a></li>
+                </ul>
+            </div>
+        </header>
+        <h1 th:inline="text">Hello, <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
         </form>

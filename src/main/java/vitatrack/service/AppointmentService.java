@@ -1,17 +1,18 @@
 package vitatrack.service;
 
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import vitatrack.Appointment;
 import vitatrack.Patient;
 import vitatrack.Provider;
 import vitatrack.data.AppointmentRepository;
 import vitatrack.data.PatientRepository;
 import vitatrack.data.ProviderRepository;
-
-import java.time.LocalTime;
-import java.util.Date;
-import java.util.List;
 
 @Service
 public class AppointmentService {
@@ -28,6 +29,10 @@ public class AppointmentService {
     }
 
     public Appointment newAppointment(Appointment appointment, Long providerId, Long patientId){
+
+        if (!isSlotAvailable(providerId, appointment.getAppointmentDate(), appointment.getStartTime(), appointment.getEndTime())){
+            return null;
+        }
         Provider bookedProv = providerRepository.findProviderById(providerId);
         Patient bookedPat = patientRepository.findPatientById(patientId);
 
@@ -108,6 +113,10 @@ public class AppointmentService {
         Patient patient = patientRepository.findPatientById(patientId);
 
         return appointmentRepository.findAllByPatient(patient);
+    }
+
+    public Appointment getAppointment(Long appointmentId){
+        return appointmentRepository.findAppointmentById(appointmentId);
     }
 
 }

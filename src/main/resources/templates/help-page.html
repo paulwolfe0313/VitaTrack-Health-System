@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        input[type="text"], textarea {
+            width: 300px;
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <header>
+        <div class="utility-bar">
+            <div class="logo">VitaTrack</div>
+            <ul class="utility-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="./account">My Account</a></li>
+                <li><a href="#settings">Settings</a></li>
+                <li><a href="./about">About</a></li>
+                <li><a href="./help">Help</a></li>
+            </ul>
+        </div>
+    </header>
+<div class="container">
+    <h2>Contact Us</h2>
+    <p>Please use the form below to contact us for any inquiries or information you may need.</p>
+    <form action="/">
+        <input type="text" name="email" placeholder="Your Email Address" required><br>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+</body>
+</html>
