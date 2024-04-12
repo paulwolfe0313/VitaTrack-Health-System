@@ -1,14 +1,24 @@
 package vitatrack.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import vitatrack.*;
-import vitatrack.data.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import vitatrack.Appointment;
+import vitatrack.AvailablePrescriptions;
+import vitatrack.AvailableProcedures;
+import vitatrack.Patient;
+import vitatrack.PatientChart;
+import vitatrack.Provider;
+import vitatrack.data.AppointmentRepository;
+import vitatrack.data.AvailablePrescriptionsRepository;
+import vitatrack.data.AvailableProceduresRepository;
+import vitatrack.data.PatientChartRepository;
+import vitatrack.data.PatientRepository;
+import vitatrack.data.ProviderRepository;
 
 @Service
 public class ChartingService {
@@ -32,12 +42,27 @@ public class ChartingService {
         this.availablePrescriptionsRepository = availablePrescriptionsRepository;
     }
 
-    public PatientChart submitChart(Long patientId, Long providerId, Long appointmentId,
-                                    Integer height, Integer weight, Integer bloodPressureSystolic,
-                                    Integer bloodPressureDiastolic, Integer restingHeartRate,
-                                    List<AvailableProcedures> procedures, List<AvailablePrescriptions> prescriptions){
-        PatientChart chart = createNewChart(patientId, providerId, appointmentId);
-        return setVitals(chart.getId(), height, weight, bloodPressureSystolic, bloodPressureDiastolic, restingHeartRate, procedures, prescriptions);
+    public PatientChart submitChart(Appointment appointment, PatientChart chart, AvailableProcedures procedure, AvailablePrescriptions prescription){
+        appointment.setPatientChart(chart);
+        chart.setAppointment(appointment);
+        chart.getProcedures().add(procedure);
+        chart.getPrescriptions().add(prescription);
+
+        Patient pat = appointment.getPatient();
+        Provider prov = appointment.getProvider();
+
+        chart.setPatient(pat);
+        chart.setProvider(prov);
+
+        pat.getPatientChart().add(chart);
+        prov.getPatientChart().add(chart);
+
+        patientRepository.save(pat);
+        providerRepository.save(prov);
+        appointmentRepository.save(appointment);
+        patientChartRepository.save(chart);
+
+        return chart;
     }
 
     public PatientChart createNewChart(Long patientId, Long providerId, Long appointmentId) {
@@ -104,5 +129,21 @@ public class ChartingService {
         map.put("Procedures", new ArrayList<>(availableProceduresRepository.findAll()));
         map.put("Prescriptions", new ArrayList<>(availablePrescriptionsRepository.findAll()));
         return map;
+    }
+
+    public List<AvailableProcedures> getProcedures(){
+        return availableProceduresRepository.findAll().stream().toList();
+    }
+
+    public List<AvailablePrescriptions> getPrescriptions(){
+        return availablePrescriptionsRepository.findAll().stream().toList();
+    }
+
+    public AvailableProcedures getProcedureById(Long procedureId){
+        return availableProceduresRepository.findAvailableProceduresById(procedureId);
+    }
+
+    public AvailablePrescriptions getPrescriptionById(Long prescriptionId){
+        return availablePrescriptionsRepository.findAvailablePrescriptionsById(prescriptionId);
     }
 }

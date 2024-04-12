@@ -1,7 +1,13 @@
 package vitatrack.service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import vitatrack.AvailableProcedures;
 import vitatrack.Bill;
 import vitatrack.Patient;
@@ -10,9 +16,6 @@ import vitatrack.data.AdminRepository;
 import vitatrack.data.BillRepository;
 import vitatrack.data.PatientChartRepository;
 import vitatrack.data.PatientRepository;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 @Service
 public class BillingService {
@@ -30,8 +33,8 @@ public class BillingService {
         this.adminRepository = adminRepository;
     }
 
-    public Bill generateBill(Long patientChartId){
-        PatientChart chart = patientChartRepository.findPatientChartById(patientChartId);
+    public Bill generateBill(PatientChart chart){
+
         Bill bill = new Bill();
         BigDecimal totalCost = BigDecimal.valueOf(0);
 
@@ -71,6 +74,20 @@ public class BillingService {
         PatientChart patientChart = patientChartRepository.findPatientChartById(patientChartId);
 
         return billRepository.findAllByPatientChart(patientChart);
+    }
+
+    public List<Bill> getUnpaidBills(Long patientId){
+        List<Bill> unpaidBills = billRepository.findAllByPaid(false);
+
+        List<Bill> patientBills = new ArrayList<>();
+
+        for (Bill unpaidBill: unpaidBills){
+            if (Objects.equals(unpaidBill.getPatientChart().getPatient().getId(), patientId)){
+                patientBills.add(unpaidBill);
+            }
+        }
+
+        return patientBills;
     }
 
 
