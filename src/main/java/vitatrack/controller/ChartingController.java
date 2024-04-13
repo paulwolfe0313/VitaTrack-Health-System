@@ -89,13 +89,13 @@ public class ChartingController {
     }
 
     @RequestMapping(value = "patient-records", method = RequestMethod.POST)
-    public String getPatientRecords(@RequestParam(value = "patientId") Long patientId, Model model){
+    public String getPatientRecords(@RequestParam(value = "patientIdRecord") Long patientId, Model model){
 
         List<PatientChart> charts = chartingService.getPatientRecords(patientId);
 
         model.addAttribute("charts", charts);
 
-        return " ";
+        return "viewrecords";
     }
 
     @RequestMapping(value = "patient-select", method = RequestMethod.GET)

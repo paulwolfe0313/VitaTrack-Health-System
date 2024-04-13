@@ -24,18 +24,19 @@
   <table style="width:100%">
     <tr>
       <th>Chart Id</th>
-      <th></th>
-      <th>Country</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Systolic Blood Pressure</th>
+      <th>Diastolic Blood Pressure</th>
+      <th>Resting Heart Rate</th>
     </tr>
-    <tr>
-      <td>Alfreds Futterkiste</td>
-      <td>Maria Anders</td>
-      <td>Germany</td>
-    </tr>
-    <tr>
-      <td>Centro comercial Moctezuma</td>
-      <td>Francisco Chang</td>
-      <td>Mexico</td>
+    <tr th:each="chart: ${charts}">
+      <td style="text-align: center;" th:text="${chart.getId()}"></td>
+      <td style="text-align: center;" th:text="${chart.getHeight()}"></td>
+      <td style="text-align: center;" th:text="${chart.getWeight()}"></td>
+      <td style="text-align: center;" th:text="${chart.getBloodPressureSystolic()}"></td>
+      <td style="text-align: center;" th:text="${chart.getBloodPressureDiastolic()}"></td>
+      <td style="text-align: center;" th:text="${chart.getRestingHeartRate()}"></td>
     </tr>
   </table>
 </div>
