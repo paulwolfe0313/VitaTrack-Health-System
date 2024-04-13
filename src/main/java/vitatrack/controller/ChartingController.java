@@ -54,7 +54,6 @@ public class ChartingController {
         return "index";
     }
 
-    // Returns Hash Map with string key "Procedures" or "Prescriptions"
     @RequestMapping(value = "/chart", method = RequestMethod.POST)
     public String getChartInfo(@RequestParam(value = "appointmentId") Long appointmentId, Model model){
 
@@ -90,8 +89,13 @@ public class ChartingController {
     }
 
     @RequestMapping(value = "patient-records", method = RequestMethod.POST)
-    public ResponseEntity<List<PatientChart>> getPatientRecords(@RequestParam(value = "patientId") Long patientId){
-        return new ResponseEntity(chartingService.getPatientRecords(patientId), HttpStatus.OK);
+    public String getPatientRecords(@RequestParam(value = "patientId") Long patientId, Model model){
+
+        List<PatientChart> charts = chartingService.getPatientRecords(patientId);
+
+        model.addAttribute("charts", charts);
+
+        return " ";
     }
 
     @RequestMapping(value = "patient-select", method = RequestMethod.GET)
@@ -111,4 +115,6 @@ public class ChartingController {
 
         return "selectappointment";
     }
+
+
 }

@@ -92,4 +92,10 @@ public class AppointmentController {
     public ResponseEntity<List<Appointment>> getAppointmentsPatient(@RequestParam(value = "patientId") Long patientId){
         return new ResponseEntity(appointmentService.getPatientAppointments(patientId), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "cancel-appointment", method = RequestMethod.POST)
+    public String cancelAppointment(@RequestParam(value="appointmentIdCancel") Long id){
+        appointmentService.cancelAppointment(id);
+        return "index";
+    }
 }

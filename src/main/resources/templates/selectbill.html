@@ -28,11 +28,11 @@
                 <div th:each="bill : ${bills}">
                     <input id = "billId" name = "billId" type="checkbox"
                            th:value="${bill.getId()}"/>
-                    <span th:text="${bill.getPatientChart().getPatient().getFirstName() + ' ' + bill.getPatientChart().getPatient().getFirstName()}">BILL</span><br/>
+                    <span th:text="${bill.getPatientChart().getPatient().getFirstName() + ' ' + bill.getPatientChart().getPatient().getLastName() + ' ' + bill.getTotalCost() + ' OUTSTANDING BILL'}">BILL</span><br/>
                 </div>
             </div>
 
-            <input type="submit" value="Submit"/>
+            <input type="submit" value="Pay Bill"/>
         </form>
     </div>
 </body>
