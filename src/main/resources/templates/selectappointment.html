@@ -26,7 +26,7 @@
     <div class="patient-group" id="patients">
       <h3>Select Appointment to Conduct:</h3>
       <div th:each="appointment : ${appointments}">
-        <input id = "appointmentId" name = "appointmentId" type="checkbox"
+        <input class="appointment-checkbox" id = "appointmentId" name = "appointmentId" type="checkbox"
                th:value="${appointment.getId()}"/>
         <span th:text="${appointment.getAppointmentDate() + ' ' + appointment.getStartTime()}">APPOINTMENT</span><br/>
       </div>
@@ -48,7 +48,7 @@
 
         <input type="submit" value="Submit"/>
     </form>
-
+    <script src="/scripts/script.js"></script>
 </div>
 </body>
 </html>
