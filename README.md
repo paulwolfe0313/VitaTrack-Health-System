@@ -30,7 +30,19 @@ The application is used from the point of view of an Admin user at the front des
 
 Upon startup, the home page will be viewed.
 
-From here, attempting to navigate to any of the 
+From here, attempting to navigate to any of the option will result in a login prompt.
+
+You should log in with the username "Admin" and password "password".
+
+From there the main options are: Schedule Appointment, Manage Patients, and Manage Billing.
+
+Schedule Appointment will allow the user to choose a provider, patient, date, and time frame to schedule an appointment.
+
+Manage Patients will allow you to view appointments for a patient or view historical records. Upon view, appointments can be selected to chart or can be cancelled.
+
+When a Chart is submitted, a bill is automatically generated.
+
+Manage Billing can be used to pay bills.
 
 ## Contributing
 
