@@ -26,7 +26,7 @@
     <div class="patient-group" id="patients">
       <h3>Select Appointment to Conduct:</h3>
       <div th:each="appointment : ${appointments}">
-        <input class="appointment-checkbox" id = "appointmentId" name = "appointmentId" type="checkbox"
+        <input class="appointment-checkbox" id = "appointmentId" name = "appointmentId" type="radio"
                th:value="${appointment.getId()}"/>
         <span th:text="${appointment.getAppointmentDate() + ' ' + appointment.getStartTime()}">APPOINTMENT</span><br/>
       </div>
@@ -40,7 +40,7 @@
         <div class="patient-group" id="appointment-cancel">
             <h3>Select Appointment to Cancel:</h3>
             <div th:each="appointment : ${appointments}">
-                <input id = "appointmentIdCancel" name = "appointmentIdCancel" type="checkbox"
+                <input id = "appointmentIdCancel" name = "appointmentIdCancel" type="radio"
                        th:value="${appointment.getId()}"/>
                 <span th:text="${appointment.getAppointmentDate() + ' ' + appointment.getStartTime()}">APPOINTMENT</span><br/>
             </div>

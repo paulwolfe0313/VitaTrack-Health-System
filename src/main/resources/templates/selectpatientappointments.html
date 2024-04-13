@@ -26,7 +26,7 @@
     <div class="patient-group" id="patients">
       <h3>Select Patient to View Appointments:</h3>
       <div th:each="patient : ${patients}">
-        <input class="patient-checklist" id = "patientId" name = "patientId" type="checkbox"
+        <input class="patient-checklist" id = "patientId" name = "patientId" type="radio"
                th:value="${patient.getId()}"/>
         <span th:text="${patient.getFirstName() + ' ' + patient.getLastName()}">PATIENT</span><br/>
       </div>
@@ -35,12 +35,12 @@
     <input type="submit" value="Submit"/>
   </form>
 
-    <form action="#" method="POST" th:action="@{/patient-records}" id="patientRecordsForm" th:object="${patients}">
+    <form action="#" method="POST" th:action="@{/patient-records}" id="patientRecordsForm" th:object="${patients}" >
 
         <div class="patient-group" id="patientsRecord">
             <h3>Select Patient to View Records:</h3>
             <div th:each="patient : ${patients}">
-                <input id = "patientIdRecord" name = "patientIdRecord" type="checkbox"
+                <input class="patientrecord-checklist" id = "patientIdRecord" name = "patientIdRecord" type="radio"
                        th:value="${patient.getId()}"/>
                 <span th:text="${patient.getFirstName() + ' ' + patient.getLastName()}">PATIENT</span><br/>
             </div>
