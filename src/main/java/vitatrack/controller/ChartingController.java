@@ -58,14 +58,14 @@ public class ChartingController {
     @RequestMapping(value = "/chart", method = RequestMethod.POST)
     public String getChartInfo(@RequestParam(value = "appointmentId") Long appointmentId, Model model){
 
-        Appointment appointment = appointmentService.getAppointment(appointmentId);
+        //Appointment appointment = appointmentService.getAppointment(appointmentId);
 
         List<AvailableProcedures> procedures = chartingService.getProcedures();
         List<AvailablePrescriptions> prescriptions = chartingService.getPrescriptions();
 
         PatientChart chart = new PatientChart();
 
-        model.addAttribute("appointment", appointment);
+        model.addAttribute("appointment", appointmentId);
         model.addAttribute("procedures", procedures);
         model.addAttribute("prescriptions", prescriptions);
         model.addAttribute("chart", chart);
@@ -75,7 +75,10 @@ public class ChartingController {
 
     @RequestMapping(value = "chart-submit", method = RequestMethod.POST)
     public String submitChart(@RequestParam(value = "procedureId") Long procedureId, @RequestParam(value = "prescriptionId") Long prescriptionId,
-                              @ModelAttribute(value = "chart") PatientChart chart, @ModelAttribute(value = "appointment") Appointment appointment){
+                              @ModelAttribute(value = "chart") PatientChart chart, @RequestParam(value = "appointmentId") Long appointmentId){
+
+        Appointment appointment = appointmentService.getAppointment(appointmentId);
+
         AvailableProcedures procedure = chartingService.getProcedureById(procedureId);
         AvailablePrescriptions prescription = chartingService.getPrescriptionById(prescriptionId);
 

@@ -24,8 +24,9 @@ public class BillingController {
     UserService userService;
 
     @Autowired
-    public BillingController(BillingService billingService) {
+    public BillingController(BillingService billingService, UserService userService) {
         this.billingService = billingService;
+        this.userService = userService;
     }
 
     @RequestMapping(value = "/view-bills", method = RequestMethod.GET)
@@ -39,8 +40,11 @@ public class BillingController {
     //}
 
     @RequestMapping(value = "/pay-bill", method = RequestMethod.POST)
-    public ResponseEntity<Bill> payBill(@RequestParam(value = "billId") Long billId, @RequestParam(value = "selfPay") boolean selfPay){
-        return new ResponseEntity(billingService.payBill(billId, selfPay), HttpStatus.OK);
+    public String payBill(@RequestParam(value = "billId") Long billId){
+
+        billingService.payBill(billId);
+
+        return "index";
     }
 
     @RequestMapping(value = "patient-select-bill", method = RequestMethod.GET)

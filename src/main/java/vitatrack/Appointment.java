@@ -32,7 +32,6 @@ public class Appointment {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -40,7 +39,6 @@ public class Appointment {
     @JsonIdentityReference(alwaysAsId=true)
     private Provider provider;
 
-    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -48,6 +46,7 @@ public class Appointment {
     @JsonIdentityReference(alwaysAsId=true)
     private Patient patient;
 
+    @JsonIgnore
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,

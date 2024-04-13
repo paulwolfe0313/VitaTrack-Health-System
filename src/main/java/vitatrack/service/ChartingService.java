@@ -43,7 +43,7 @@ public class ChartingService {
     }
 
     public PatientChart submitChart(Appointment appointment, PatientChart chart, AvailableProcedures procedure, AvailablePrescriptions prescription){
-        appointment.setPatientChart(chart);
+        //appointment.setPatientChart(chart);
         chart.setAppointment(appointment);
         chart.getProcedures().add(procedure);
         chart.getPrescriptions().add(prescription);
@@ -59,7 +59,7 @@ public class ChartingService {
 
         patientRepository.save(pat);
         providerRepository.save(prov);
-        appointmentRepository.save(appointment);
+        //appointmentRepository.save(appointment);
         patientChartRepository.save(chart);
 
         return chart;

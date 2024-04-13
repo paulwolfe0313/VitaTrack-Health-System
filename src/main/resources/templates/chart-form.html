@@ -40,6 +40,8 @@
             </div>
         </div>
 
+        <input type="hidden" name="appointmentId" th:value="${appointment}"/>
+
         <label for="height">Height (in.): </label>
         <input type="number" th:field="*{height}"/><br/>
 

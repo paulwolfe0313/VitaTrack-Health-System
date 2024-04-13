@@ -53,12 +53,12 @@ public class BillingService {
         return bill;
     }
 
-    public Bill payBill(Long billId, boolean selfPay){
+    public Bill payBill(Long billId){
         Bill bill = billRepository.findBillById(billId);
         PatientChart chart = bill.getPatientChart();
         Patient patient = bill.getPatientChart().getPatient();
 
-        if (selfPay){
+        if (true){
             bill.setPaymentCard(patient.getPaymentCardNumber());
         } else {
             bill.setPaymentCard(patient.getInsuranceNumber());
