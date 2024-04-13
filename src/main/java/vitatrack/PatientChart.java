@@ -2,6 +2,7 @@ package vitatrack;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,6 +35,7 @@ public class PatientChart {
     @JsonIdentityReference(alwaysAsId=true)
     private Appointment appointment;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -41,6 +43,7 @@ public class PatientChart {
     @JsonIdentityReference(alwaysAsId=true)
     private Provider provider;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -48,6 +51,7 @@ public class PatientChart {
     @JsonIdentityReference(alwaysAsId=true)
     private Patient patient;
 
+    @JsonIgnore
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
