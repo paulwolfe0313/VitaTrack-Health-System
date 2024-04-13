@@ -26,7 +26,7 @@
     <div class="patient-group" id="patients">
       <h3>Select your Patient:</h3>
       <div th:each="patient : ${patients}">
-        <input id = "patientId" name = "patientId" type="checkbox"
+        <input class="patient-checkbox" id = "patientId" name = "patientId" type="checkbox"
               th:value="${patient.getId()}"/>
         <span th:text="${patient.getFirstName() + ' ' + patient.getLastName()}">PATIENT</span><br/>
       </div>
@@ -34,7 +34,7 @@
 
     <input type="submit" value="Submit"/>
   </form>
-  <script src="script.js"></script>
+  <script src="/scripts/script.js"></script>
 </div>
 </body>
 </html>
