@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -39,6 +40,7 @@ public class Patient extends Users{
     private String insuranceProvider;
     private String insuranceNumber;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "patient", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -46,6 +48,7 @@ public class Patient extends Users{
     @JsonIdentityReference(alwaysAsId=true)
     private List<Appointment> appointment;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "patient", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,

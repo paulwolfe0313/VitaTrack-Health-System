@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Vitatrack Health System</title>
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+  <header>
+    <div class="utility-bar">
+        <div class="logo">VitaTrack</div>
+        <ul class="utility-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="./account">My Account</a></li>
+            <li><a href="#settings">Settings</a></li>
+            <li><a href="./about">About</a></li>
+            <li><a href="./help">Help</a></li>
+        </ul>
+    </div>
+</header>
+<div class="appointment-container">
+  <h1 class="patient-title">Appointment Select</h1>
+  <form action="#" method="POST" th:action="@{/chart}" id="appointmentForm" th:object="${appointments}">
+
+    <div class="patient-group" id="patients">
+      <h3>Select Appointment to Conduct:</h3>
+      <div th:each="appointment : ${appointments}">
+        <input class="appointment-checkbox" id = "appointmentId" name = "appointmentId" type="radio"
+               th:value="${appointment.getId()}"/>
+        <span th:text="${appointment.getAppointmentDate() + ' ' + appointment.getStartTime()}">APPOINTMENT</span><br/>
+      </div>
+    </div>
+
+    <input type="submit" value="Submit"/>
+  </form>
+
+    <form action="#" method="POST" th:action="@{/cancel-appointment}" id="appointmentFormCancel" th:object="${appointments}">
+
+        <div class="patient-group" id="appointment-cancel">
+            <h3>Select Appointment to Cancel:</h3>
+            <div th:each="appointment : ${appointments}">
+                <input id = "appointmentIdCancel" name = "appointmentIdCancel" type="radio"
+                       th:value="${appointment.getId()}"/>
+                <span th:text="${appointment.getAppointmentDate() + ' ' + appointment.getStartTime()}">APPOINTMENT</span><br/>
+            </div>
+        </div>
+
+        <input type="submit" value="Submit"/>
+    </form>
+    <script src="/scripts/script.js"></script>
+</div>
+</body>
+</html>

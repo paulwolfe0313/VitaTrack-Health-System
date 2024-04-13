@@ -19,36 +19,18 @@
             </ul>
         </div>
     </header>
-<div class="appointment-container">
-    <h1 class="appointment-title">Schedule Appointment</h1>
-    <form action="#" method="POST" th:action="@{/book-appointment}" id="appointmentForm" th:object="${appointment}">
-        <div class="provider-group" id="providers">
-            <h3>Select your Provider:</h3>
-            <div th:each="doctor : ${providers}">
-                <input id = "providerId" name = "providerId" type="checkbox"
-                       th:value="${doctor.getId()}"/>
-                <span th:text="${doctor.getFirstName() + ' ' + doctor.getLastName()}">PROVIDER</span><br/>
-            </div>
-        </div>
+<div class="patient-container">
+    <h1 class="patient-title">Patient Select</h1>
+    <form action="#" method="POST" th:action="@{/patient-choice-bill}" id="patientForm" th:object="${patients}">
 
         <div class="patient-group" id="patients">
             <h3>Select your Patient:</h3>
             <div th:each="patient : ${patients}">
                 <input id = "patientId" name = "patientId" type="checkbox"
-                        th:value="${patient.getId()}"/>
+                       th:value="${patient.getId()}"/>
                 <span th:text="${patient.getFirstName() + ' ' + patient.getLastName()}">PATIENT</span><br/>
             </div>
         </div>
-
-        <label for="appointmentDate">Date: </label>
-        <input type="date" th:field="*{appointmentDate}"/><br/>
-
-        <label for="startTime">Start Time: </label>
-        <input type="time" th:field="*{startTime}"/><br/>
-
-        <label for="endTime">End Time: </label>
-        <input type="time" th:field="*{endTime}"/><br/>
-
 
         <input type="submit" value="Submit"/>
     </form>

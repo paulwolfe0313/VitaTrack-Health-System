@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vitatrack Health System</title>
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+    <header>
+        <div class="utility-bar">
+            <div class="logo">VitaTrack</div>
+            <ul class="utility-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="./account">My Account</a></li>
+                <li><a href="#settings">Settings</a></li>
+                <li><a href="./about">About</a></li>
+                <li><a href="./help">Help</a></li>
+            </ul>
+        </div>
+    </header>
+<div class="chart-container">
+    <h1 class="chart-title">Register</h1>
+    <form action="#" method="POST" th:action="@{/chart-submit}" id="appointmentForm" th:object="${chart}">
+        <div class="procedure-group" id="procedures">
+            <h3>Select your Procedure:</h3>
+            <div th:each="procedure : ${procedures}">
+                <input id = "procedureId" name = "procedureId" type="checkbox"
+                       th:value="${procedure.getId()}"/>
+                <span th:text="${procedure.getProcedureName()}">PROVIDER</span><br/>
+            </div>
+        </div>
+
+        <div class="prescription-group" id="prescriptions">
+            <h3>Select your Prescription:</h3>
+            <div th:each="prescription : ${prescriptions}">
+                <input id = "prescriptionId" name = "prescriptionId" type="checkbox"
+                       th:value="${prescription.getId()}"/>
+                <span th:text="${prescription.getPrescriptionName()}">PRESCRIPTION</span><br/>
+            </div>
+        </div>
+
+        <input type="hidden" name="appointmentId" th:value="${appointment}"/>
+
+        <label for="height">Height (in.): </label>
+        <input type="number" th:field="*{height}"/><br/>
+
+        <label for="weight">Weight (lb.): </label>
+        <input type="number" th:field="*{weight}"/><br/>
+
+        <label for="systolicBloodPressure">Systolic Blood Pressure: </label>
+        <input type="number" th:field="*{bloodPressureSystolic}"/><br/>
+
+        <label for="diastolicBloodPressure">Diastolic Blood Pressure: </label>
+        <input type="number" th:field="*{bloodPressureDiastolic}"/><br/>
+
+        <label for="restingHeartRate">Resting Heart Rate: </label>
+        <input type="number" th:field="*{restingHeartRate}"/><br/>
+
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
+</body>
+</html>

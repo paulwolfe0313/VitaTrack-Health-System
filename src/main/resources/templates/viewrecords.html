@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Vitatrack Health System</title>
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+<header>
+  <div class="utility-bar">
+    <div class="logo">VitaTrack</div>
+    <ul class="utility-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="./account">My Account</a></li>
+      <li><a href="#settings">Settings</a></li>
+      <li><a href="./about">About</a></li>
+      <li><a href="./help">Help</a></li>
+    </ul>
+  </div>
+</header>
+<div class="bill-container">
+  <h1 class="bill-title">Records</h1>
+  <table style="width:100%">
+    <tr>
+      <th>Chart Id</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Systolic Blood Pressure</th>
+      <th>Diastolic Blood Pressure</th>
+      <th>Resting Heart Rate</th>
+    </tr>
+    <tr th:each="chart: ${charts}">
+      <td style="text-align: center;" th:text="${chart.getId()}"></td>
+      <td style="text-align: center;" th:text="${chart.getHeight()}"></td>
+      <td style="text-align: center;" th:text="${chart.getWeight()}"></td>
+      <td style="text-align: center;" th:text="${chart.getBloodPressureSystolic()}"></td>
+      <td style="text-align: center;" th:text="${chart.getBloodPressureDiastolic()}"></td>
+      <td style="text-align: center;" th:text="${chart.getRestingHeartRate()}"></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
