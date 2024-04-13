@@ -24,17 +24,30 @@
   <form action="#" method="POST" th:action="@{/patient-choice}" id="patientForm" th:object="${patients}">
 
     <div class="patient-group" id="patients">
-      <h3>Select your Patient:</h3>
+      <h3>Select Patient to View Appointments:</h3>
       <div th:each="patient : ${patients}">
-        <input class="patient-checkbox" id = "patientId" name = "patientId" type="checkbox"
-              th:value="${patient.getId()}"/>
+        <input id = "patientId" name = "patientId" type="checkbox"
+               th:value="${patient.getId()}"/>
         <span th:text="${patient.getFirstName() + ' ' + patient.getLastName()}">PATIENT</span><br/>
       </div>
     </div>
 
     <input type="submit" value="Submit"/>
   </form>
-  <script src="/scripts/script.js"></script>
+
+    <form action="#" method="POST" th:action="@{/patient-records}" id="patientRecordsForm" th:object="${patients}">
+
+        <div class="patient-group" id="patientsRecord">
+            <h3>Select Patient to View Records:</h3>
+            <div th:each="patient : ${patients}">
+                <input id = "patientIdRecord" name = "patientIdRecord" type="checkbox"
+                       th:value="${patient.getId()}"/>
+                <span th:text="${patient.getFirstName() + ' ' + patient.getLastName()}">PATIENT</span><br/>
+            </div>
+        </div>
+
+        <input type="submit" value="Submit"/>
+    </form>
 </div>
 </body>
 </html>

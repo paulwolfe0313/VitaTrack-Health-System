@@ -43,7 +43,7 @@ public class ChartingService {
     }
 
     public PatientChart submitChart(Appointment appointment, PatientChart chart, AvailableProcedures procedure, AvailablePrescriptions prescription){
-        //appointment.setPatientChart(chart);
+
         chart.setAppointment(appointment);
         chart.getProcedures().add(procedure);
         chart.getPrescriptions().add(prescription);
@@ -59,7 +59,6 @@ public class ChartingService {
 
         patientRepository.save(pat);
         providerRepository.save(prov);
-        //appointmentRepository.save(appointment);
         patientChartRepository.save(chart);
 
         return chart;
@@ -124,12 +123,6 @@ public class ChartingService {
         return patientChartRepository.findAllByPatient(patient);
     }
 
-    public HashMap<String, ArrayList<Object>> getProceduresAndPrescriptions(){
-        HashMap<String, ArrayList<Object>> map = new HashMap<>();
-        map.put("Procedures", new ArrayList<>(availableProceduresRepository.findAll()));
-        map.put("Prescriptions", new ArrayList<>(availablePrescriptionsRepository.findAll()));
-        return map;
-    }
 
     public List<AvailableProcedures> getProcedures(){
         return availableProceduresRepository.findAll().stream().toList();
